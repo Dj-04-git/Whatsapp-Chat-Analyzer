@@ -119,20 +119,19 @@ if uploaded_file is not None:
         st.title("Emoji Analysis")
 
         col1, col2 = st.columns(2)
+        with col1:
+            st.dataframe(emoji_df)
 
-            with col1:
-                st.dataframe(emoji_df)
-
-            with col2:
-                if not emoji_df.empty:
-                    fig, ax = plt.subplots()
-                    ax.pie(
-                        emoji_df["count"].head(),
-                        labels=emoji_df["emoji"].head(),
-                        autopct="%0.2f",
-                        startangle=90
-                    )
-                    ax.axis("equal")  # makes circle proper
-                    st.pyplot(fig)
-                else:
-                    st.write("No emojis found")
+        with col2:
+            if not emoji_df.empty:
+                fig, ax = plt.subplots()
+                ax.pie(
+                    emoji_df["count"].head(),
+                    labels=emoji_df["emoji"].head(),
+                    autopct="%0.2f",
+                    startangle=90
+                )
+                ax.axis("equal")  # makes circle proper
+                st.pyplot(fig)
+            else:
+                st.write("No emojis found")
